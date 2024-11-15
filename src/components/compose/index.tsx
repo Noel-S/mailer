@@ -11,10 +11,10 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { Textarea } from "@/components/ui/textarea"
 import { Input } from "../ui/input"
 import { invoke } from "@tauri-apps/api/core"
 import { toast } from "sonner"
+import Tiptap from "../tiptap"
 
 const FormSchema = z.object({
   to: z
@@ -92,11 +92,9 @@ export function Compose() {
             <FormItem>
               <FormLabel>Content</FormLabel>
               <FormControl>
-                <Textarea
-                  placeholder="What's on your mind?"
-                  className="resize-y"
-                  {...field}
-                />
+                <Tiptap onUpdate={(value) => {
+                  field.onChange({ target: { value } })
+                }} />
               </FormControl>
               <FormMessage />
             </FormItem>
